@@ -1,0 +1,4 @@
+# Xy2445 Binary Output Module Device Support
+device(bo,         INST_IO, devBoXy2445,         "XYCOM-2445")
+device(mbbo,       INST_IO, devMbboXy2445,       "XYCOM-2445")
+device(mbboDirect, INST_IO, devMbboDirectXy2445, "XYCOM-2445")

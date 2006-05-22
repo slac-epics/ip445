@@ -1,5 +1,5 @@
 # Makefile.Host
-TOP = ../../../..
+TOP = ../..
 include $(TOP)/configure/CONFIG
 
 DBD += drvXy2445.dbd

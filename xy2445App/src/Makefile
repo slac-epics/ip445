@@ -2,8 +2,7 @@
 TOP = ../..
 include $(TOP)/configure/CONFIG
 
-DBD += drvXy2445.dbd
-DBD += devXy2445.dbd
+DBD += Xy2445.dbd
 
 # Source files (for depends target):
 LIBSRCS += drvXy2445.c

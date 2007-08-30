@@ -2,6 +2,8 @@
 TOP = ../..
 include $(TOP)/configure/CONFIG
 
+HTMLS += xycomIpac.html
+
 DBD += Xy2445.dbd
 
 # Source files (for depends target):

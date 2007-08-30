@@ -1,0 +1,17 @@
+#==============================================================
+#
+#  Name: RELEASE_NOTES
+#
+#  Rem: This files describes release notes for
+#       the Xycom 2445 driver and device support.
+#
+#  Auth: dd-mmm-yyyy, Andy Foster        (USERNAME)
+#  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
+#--------------------------------------------------------------
+#  Mod:
+#        dd-mmm-yyyy, First Lastname     (USERNAME):
+#          comment
+#
+#==============================================================
+#
+xy2445-R1-0-0:   Initial release

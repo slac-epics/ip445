@@ -84,6 +84,7 @@ int xy2445Report( int interest )
         plist->id_prom[i] = xy2445Input((unsigned int *)&idptr[j]);
 
       printf("\nBoard Status Information: %s\n", plist->pName);
+      printf("\nBase IO Address:          0x%lx\n", (unsigned long)plist->brd_ptr);
       printf("\nIdentification:              ");
       for(i = 0; i < 4; i++)                 /* identification */
         printf("%c",plist->id_prom[i]);
@@ -197,7 +198,7 @@ void xy2445SetConfig( char *pName, unsigned short card, unsigned short slot,
   pconfig->pName   = pName;
   pconfig->card    = card;
   pconfig->slot    = slot;
-  pconfig->brd_ptr = (struct map2445 *)ipmBaseAddr(card, slot, ipac_addrIO);
+  pconfig->brd_ptr = (volatile struct map2445 *)ipmBaseAddr(card, slot, ipac_addrIO);
   
   /* Perform a software reset */
   xy2445Output((unsigned *)&pconfig->brd_ptr->cntl_reg, (int)0x01);
@@ -208,7 +209,7 @@ long xy2445Read( char *name, short port, short bit, int readFlag,
                  unsigned short *pval, int debug )
 {
   struct config2445 *plist;
-  struct map2445    *map_ptr;
+  volatile struct map2445    *map_ptr;
   unsigned char     port0;
   unsigned char     port1;
   unsigned char     port2;
@@ -284,7 +285,7 @@ long xy2445Write( char *name, short port, short bit, int writeFlag,
                   long value, int debug )
 {
   struct config2445 *plist;
-  struct map2445    *map_ptr;
+  volatile struct map2445    *map_ptr;
   unsigned char     port0;
   unsigned char     port1;
   unsigned char     port2;
@@ -440,13 +441,13 @@ void *xy2445FindCard( char *name )
 
 unsigned char xy2445Input( unsigned *addr ) 
 {
-  return((unsigned char) *((char *)addr));
+  return((unsigned char) *((volatile char *)addr));
 }
 
 
 void xy2445Output( unsigned *addr, int b )
 {
-  *((char *)addr) = (char)b; 
+  *((volatile char *)addr) = (char)b; 
 }
 
 

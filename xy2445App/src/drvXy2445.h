@@ -85,7 +85,7 @@ struct config2445
   char              *pName;       /* Name to identify this card           */
   unsigned short    card;         /* Number of IP carrier board           */
   unsigned short    slot;         /* Slot number in carrier board         */
-  struct map2445    *brd_ptr;     /* pointer to base address of board     */
+  volatile struct map2445    *brd_ptr;     /* pointer to base address of board     */
   unsigned char     id_prom[32];  /* board ID Prom                        */
 };
 

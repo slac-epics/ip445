@@ -10,8 +10,9 @@
 #  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
 #--------------------------------------------------------------
 #  Mod:
-#        dd-mmm-yyyy, First Lastname     (USERNAME):
-#          comment
+#        29-Apr-2009, K. Luchini         (LUCHINI):
+#          Now built under RTEMS-4.9.1 and EPICS-R3.14.8.2
+
 #
 #==============================================================
 #
@@ -23,3 +24,4 @@ EPICS OSI support has been added to this driver by Till Strauman at SLAC.
 Operating System:
 -------------------
 This driver has only been tested under RTEMS since osi support has been added.
+This driver is currently built under RTEMS-4.9.1

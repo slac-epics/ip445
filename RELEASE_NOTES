@@ -9,6 +9,8 @@
 #  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
 #--------------------------------------------------------------
 #  Mod:
+#        29-Apr-2009, K. Luchini         (LUCHINI):
+#          release xy2445-R1-0-lcls1 
 #        27-Apr-2009, K  Luchini         (LUCHINI):
 #          release xy2445-R2-0-0
 #        06-Nov-2008, K. Luchini         (LUCHINI):
@@ -25,6 +27,8 @@
 #
 #==============================================================
 #
+xy2444-R1-0-lcls1: Use naming convention for tag
+
 xy2445-R2-0-0:   Build with base-R3-14-8-2=lcls-3
                  Build with rtems-4-9-1
 

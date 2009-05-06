@@ -27,10 +27,9 @@
 #
 #==============================================================
 #
-xy2444-R1-0-lcls1: Use naming convention for tag
-
 xy2445-R2-0-0:   Build with base-R3-14-8-2=lcls-3
                  Build with rtems-4-9-1
+                 Comments out readback during init to help restore
 
 xy2445-R1-0-6:   Build with base-R3-14-8-2
                  Build with ipac-R2-8-lcls3
@@ -51,6 +50,8 @@ xy2445-R1-0-3:   Build with base-R3-14-9-lcls1
 
 xy2445-R1-0-2:   Build with base-R3-14-8-2-lcls2
                  Build with ipac-R2-8-lcls1
+
+xy2444-R1-0-lcls1: Use naming convention for tag
 
 xy2445-R1-0-1:   Build with ipac-R1-0-2 instead of ipac-R1-0-1
 

@@ -139,8 +139,8 @@ static long init_bo(struct boRecord *pbo)
               }
               else
               {
-                pbo->rbv  = value;
-                pbo->rval = value;
+                /*pbo->rbv  = value;
+                pbo->rval = value;*/	/* No readback, to help restore */
               }
             }
           }
@@ -158,7 +158,7 @@ static long init_bo(struct boRecord *pbo)
                   "devBoXy2445 (init_bo) illegal OUT field", TRUE);
       break;
   }
-  return(status);
+  return(2);
 }
 
 
@@ -243,8 +243,8 @@ static long init_mbbo(struct mbboRecord *pmbbo)
               }
               else
               {
-                pmbbo->rbv  = value & pmbbo->mask;
-                pmbbo->rval = value & pmbbo->mask;
+                /*pmbbo->rbv  = value & pmbbo->mask;
+                pmbbo->rval = value & pmbbo->mask;*/	/* no readback, to help restore */
               }
             }
           }
@@ -262,7 +262,7 @@ static long init_mbbo(struct mbboRecord *pmbbo)
                   "devMbboXy2445 (init_mbbo) illegal OUT field", TRUE);
       break;
   }
-  return(status);
+  return(2);
 }
 
 
@@ -349,8 +349,8 @@ static long init_mbboDirect(struct mbboDirectRecord *pmbboDirect)
               }
               else
               {
-                pmbboDirect->rbv  = value & pmbboDirect->mask;
-                pmbboDirect->rval = value & pmbboDirect->mask;
+                /*pmbboDirect->rbv  = value & pmbboDirect->mask;
+                pmbboDirect->rval = value & pmbboDirect->mask;*/	/* No readback, to help restore */
 
                 /* ajf - This is a kludge BUT if this is not done       */
                 /* the value entered the first time in SUPERVISORY mode */
@@ -373,7 +373,7 @@ static long init_mbboDirect(struct mbboDirectRecord *pmbboDirect)
                   "devMbboDirectXy2445 (init_mbboDirect) illegal OUT field", TRUE);
       break;
   }
-  return(status);
+  return(2);
 }
 
 

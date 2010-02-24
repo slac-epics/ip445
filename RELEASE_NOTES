@@ -9,6 +9,8 @@
 #  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
 #--------------------------------------------------------------
 #  Mod:
+#        23-Feb-2010, K. Luchini         (LUCHINI):
+#          release xy2445-R1-0-lcls2
 #        29-Apr-2009, K. Luchini         (LUCHINI):
 #          release xy2445-R1-0-lcls1 
 #        27-Apr-2009, K  Luchini         (LUCHINI):
@@ -27,9 +29,14 @@
 #
 #==============================================================
 #
-xy2445-R2-0-0:   Build with base-R3-14-8-2=lcls-3
-                 Build with rtems-4-9-1
-                 Comments out readback during init to help restore
+xy2445-R1-0-lcls2: Build with base-R3-14-8-2-lcls-5
+                   Build with rtems-4.9.3
+
+xy2445-R1-0-lcls1: Build with base-R3-14-8-2-lcls-3
+                   Build with rtems-4.9.1
+                   Comments out readback during init to help restore
+                   same as xy2445-R2-0-0, but use new naming convention
+                   for drivers maintained outside of SLAC.
 
 xy2445-R1-0-6:   Build with base-R3-14-8-2
                  Build with ipac-R2-8-lcls3

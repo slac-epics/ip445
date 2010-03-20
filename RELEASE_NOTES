@@ -9,6 +9,8 @@
 #  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
 #--------------------------------------------------------------
 #  Mod:
+#        20-Mar-2010, S. Hoobler         (SONYA):
+#          release xy2445-R1-0-lcls3
 #        23-Feb-2010, K. Luchini         (LUCHINI):
 #          release xy2445-R1-0-lcls2
 #        29-Apr-2009, K. Luchini         (LUCHINI):
@@ -29,6 +31,9 @@
 #
 #==============================================================
 #
+xy2445-R1-0-lcls3: Build with base-R3-14-8-2-lcls-6
+                   Build with rtems-4.9.4
+
 xy2445-R1-0-lcls2: Build with base-R3-14-8-2-lcls-5
                    Build with rtems-4.9.3
 

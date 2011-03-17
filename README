@@ -18,12 +18,28 @@
 #
 EPICS Verions:
 --------------
-This driver has currently been built and tested at SLAC with EPICS 3.14.8.2.
+This driver has currently been built and tested at SLAC with EPICS 3.14.8.2
+and EPICS 3.14.9.
 EPICS OSI support has been added to this driver by Till Strauman at SLAC.
 
 Operating System:
 -------------------
 This driver has only been tested under RTEMS since osi support has been added.
+
+Hardware Notes:
+-------------------
+Output channels of this module are divided into four ports of eight channels each.
+All channels within a port share a common signal connection with each other.
+Isolation is provided between the ports and the IP logic.
+In addition, bus isolation is provided between ports.
+
+Each of the four ports has an SIP resistor pack that, when installed and a
+power supply is connected to the user supply pin, pulls those 8 channels high.
+The default SIP is 4.7K ohm per channel.
+
+Note: If the SIP is installed but no power is provided to the user supply pin,
+there is still a 9.4K ohm path between the outputs that can cause crosstalk
+problems if your outputs drive TTL inputs.
 
 How to use this module in your IOC
 ------------------

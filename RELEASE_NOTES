@@ -31,6 +31,9 @@
 #
 #==============================================================
 #
+xy2445-R1-0-lcls4: Changes to decouple the version of EPICS BASE from the configure/RELEASE
+                   Everything is essentially done in the RELEASE_SITE file now.
+
 xy2445-R1-0-lcls3: Build with base-R3-14-8-2-lcls-6
                    Build with rtems-4.9.4
 

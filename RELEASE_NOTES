@@ -31,6 +31,8 @@
 #
 #==============================================================
 #
+xy2445-R1-0-lcls5: Build against EPICS R3-14-12 and use ipac-R2-8-lcls8
+
 xy2445-R1-0-lcls4: Changes to decouple the version of EPICS BASE from the configure/RELEASE
                    Everything is essentially done in the RELEASE_SITE file now.
 

@@ -58,5 +58,6 @@ typedef struct
 /* Function Prototypes */
 
 int   xipIoParse( char *str, xipIo_t *ptr, char flag );
+char *strdupn( const char *ct, size_t n ); 
 
 #endif  /* INCxipIoH */

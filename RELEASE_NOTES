@@ -31,8 +31,9 @@
 #
 #==============================================================
 #
-xy2445-R         : Build with ipac-R2-11-lcls1
-                   Add xipIo.h to compile with ipac-R2-11-lcls1
+xy2445-R1-0-lcls6: Build with ipac-R2-11-lcls1
+01/19/2012         Add xipIo.h to compile with ipac-R2-11-lcls1
+                   Add xioIo.c file and copy xipIoParse() and strdupn() from drvXy9660.c (ipac-R2-8-lcls8).
 
 xy2445-R1-0-lcls5: Build against EPICS R3-14-12 and use ipac-R2-8-lcls8
 

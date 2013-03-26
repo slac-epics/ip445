@@ -31,6 +31,8 @@
 #
 #==============================================================
 #
+xy2445-R1-0_1-0: Build against ipac-R2-11_1-0 which builds for all targets
+
 xy2445-R1-0-lcls6: Build with ipac-R2-11-lcls1
 01/19/2012         Add xipIo.h to compile with ipac-R2-11-lcls1
                    Add xioIo.c file and copy xipIoParse() and strdupn() from drvXy9660.c (ipac-R2-8-lcls8).

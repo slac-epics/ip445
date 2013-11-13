@@ -17,6 +17,10 @@ DB += ip445.template
 DB += xy2445.db
 DB += ip445.db
 
+ARCHIVE += ip445-signal.tpl-arch
+
+REQ += ip445-signal.tpl-req
+
 #----------------------------------------------------
 # If <anyname>.db template is not named <anyname>*.template add
 # <anyname>_TEMPLATE = <templatename>

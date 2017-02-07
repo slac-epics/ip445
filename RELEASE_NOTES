@@ -31,6 +31,10 @@
 #
 #==============================================================
 #
+R2.3.0:           marcio, 2/7/2017
+                  Creating new release R2.3.0 to avoid confusion w/ prior pcds R2.2.* releases
+                  Also updated to new git workflow base build support
+
 xy2445-R1-0_1-1: Build against ipac-R2-11_1-2 which builds for all targets
                  Build for target linuxRT-x86_64
 

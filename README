@@ -2,9 +2,16 @@
 #
 #  Name: README
 #
-#  Rem:  This is a driver for the Xycom 2445 32-channel optically
-#        isolated digital output Industry Pack (IP) with
-#        interrupts.
+#  Rem:  	This is a driver for the Xycom 2445 32-channel optically
+#		isolated digital output Industry Pack (IP) with interrupts.
+#		This driver also supports the Acromag IP445
+#		series digital input cards.
+#
+#		In order to deploy in a uniform fashion w/ the many other ip* modules,
+#		this module has been renamed from xy2445 to ip445.
+#		Support for the Xycom db, driver, and function names are all preserved
+#		for compatibility, but ip445 variants have also been made available.
+#
 #
 #  Auth: dd-mmm-yyyy, Andy Foster        (USERNAME)
 #  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
@@ -14,7 +21,6 @@
 #          Comments out readback during init to help restore
 #        29-Apr-2009, K. Luchini         (LUCHINI):
 #          Now built under RTEMS-4.9.1 and EPICS-R3.14.8.2
-
 #
 #==============================================================
 #
@@ -26,4 +32,98 @@ EPICS OSI support has been added to this driver by Till Strauman at SLAC.
 Operating System:
 -------------------
 This driver has only been tested under RTEMS since osi support has been added.
-This driver is currently built under RTEMS-4.9.1
+
+How to use this module in your IOC
+------------------
+1.      Add the following lines in your iocTop/configure/RELEASE, using your desired IP445_MODULE_VERSION:
+IP445_MODULE_VERSION=R2.3.0
+IP445=$(EPICS_MODULES)/ip445/$(IP445_MODULE_VERSION)
+
+2.
+For XyCom 2445, copy the following file to your iocTop/<iocName>/<iocName>App/Db directory:
+        xy2445App/Db/xy2445.substitutions
+For Acromag IP445, copy the following file to your iocTop/<iocName>/<iocName>App/Db directory:
+        xy2445App/Db/ip445.substitutions
+Customize as needed for your IOC
+
+3.
+For XyCom 2445, add the following lines in your iocTop/<iocName>/<iocName>App/Db/Makefile:
+DB += xy2445.db
+For Acromag IP445, add the following lines in your iocTop/<iocName>/<iocName>App/Db/Makefile:
+DB += ip445.db
+
+4.      Add the following lines in your iocTop/<iocName>/<iocName>App/src/Makefile:
+Note: Use either the ip445 variant or the Xy2445 variant here, but NOT both!
+<iocName>_DBD += ip445.dbd
+<iocName>_LIBS += ip445
+   or
+<iocName>_DBD += Xy2445.dbd
+<iocName>_LIBS += Xy2445
+
+Add the following lines in your iocTop/<iocName>/iocBoot/ioc<iocName>/st.cmd,
+selecting the Xycom or Acromag as needed.
+# Initialize IPAC carrier
+# # The 2nd parameter is the base I/O address set by the jumpers on your carrier board
+# # Make sure this address doesn't conflict with other boards.
+# # Note: ipac supports other carrier cards besides xy9660.
+# # See the ipac_carrier_t types in the ipac module for other options.
+# ipacAddCarrier(&xy9660,"0x0000")
+#
+# # Initialize digital input module
+# # Set card to the carrier number, which is 0 for the first ipacAddCarrier() call and
+# # increments as other carrier cards are added.
+# # The slot numbers are 0..3 corresponding to slots A..D on the carrier card
+# # More than one digital input card can be used as long as the name and slot # differ.
+# # ip445Create( <name>, <card>, <slot>, <modeName>, <intHndlr>, <usrFunc>, <vector>, <event>, <debounce> )
+# ip445Create( "di0", 0, 0, "STANDARD", "LEVEL", 0x0, 0x80, 0x0, 0x00 )
+# # or for backward compatibility, you can use xy2445Create.  One call per card
+# xy2445Create( "di0", 0, 0, "STANDARD", "LEVEL", 0x0, 0x80, 0x0, 0x00 )
+#
+# # Load the EPICS records
+# # For XyCom 2445:
+# dbLoadRecords("db/xy2445.db","CARD=di0")
+# # For Acromag IP445:
+# # dbLoadRecords("db/ip445.db","CARD=di0")
+#
+# ####################################################
+
+EPICS PV Values:
+----------------------
+The default names assigned by the db template and substitution files
+in this module are shown below.  These can be customized after you copy the
+template and substitution files to your ioc.
+------------------
+PV Name:                Type:           Description:
+di0:port0:in0   bi                      Digital Input 1
+di0:port0:in1   bi                      Digital Input 2
+di0:port0:in2   bi                      Digital Input 3
+di0:port0:in3   bi                      Digital Input 4
+di0:port0:in4   bi                      Digital Input 5
+di0:port0:in5   bi                      Digital Input 6
+di0:port0:in6   bi                      Digital Input 7
+di0:port0:in7   bi                      Digital Input 8
+di0:port1:in0   bi                      Digital Input 9
+di0:port1:in1   bi                      Digital Input 10
+di0:port1:in2   bi                      Digital Input 11
+di0:port1:in3   bi                      Digital Input 12
+di0:port1:in4   bi                      Digital Input 13
+di0:port1:in5   bi                      Digital Input 14
+di0:port1:in6   bi                      Digital Input 15
+di0:port1:in7   bi                      Digital Input 16
+di0:port2:in0   bi                      Digital Input 17
+di0:port2:in1   bi                      Digital Input 18
+di0:port2:in2   bi                      Digital Input 19
+di0:port2:in3   bi                      Digital Input 20
+di0:port2:in4   bi                      Digital Input 21
+di0:port2:in5   bi                      Digital Input 22
+di0:port2:in6   bi                      Digital Input 23
+di0:port2:in7   bi                      Digital Input 24
+di0:port3:in0   bi                      Digital Input 25
+di0:port3:in1   bi                      Digital Input 26
+di0:port3:in2   bi                      Digital Input 27
+di0:port3:in3   bi                      Digital Input 28
+di0:port3:in4   bi                      Digital Input 29
+di0:port3:in5   bi                      Digital Input 30
+di0:port3:in6   bi                      Digital Input 31
+di0:port3:in7   bi                      Digital Input 32
+

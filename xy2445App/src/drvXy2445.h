@@ -91,7 +91,11 @@ struct config2445
 
 int           xy2445Report( int interest );
 int           xy2445Initialise( void );
+int           ip445Report( int interest );
+int           ip445Initialise( void );
 int           xy2445Create( char *pName, unsigned short card,
+                            unsigned short slot );
+int           ip445Create( char *pName, unsigned short card,
                             unsigned short slot );
 void          xy2445SetConfig( char *pName, unsigned short card,
                                unsigned short slot,

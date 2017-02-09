@@ -62,6 +62,13 @@ struct drvet drvXy2445 = {
   (DRVSUPFUN) xy2445Initialise
 };
 epicsExportAddress(drvet, drvXy2445);
+
+struct drvet drvip445 = {
+  2,
+  (DRVSUPFUN) ip445Report,
+  (DRVSUPFUN) ip445Initialise
+};
+epicsExportAddress(drvet, drvip445);
 #endif
 
 LOCAL struct config2445 *ptrXy2445First = NULL;
@@ -123,14 +130,26 @@ int xy2445Report( int interest )
   return(OK);
 }
 
-
-int xy2445Initialise( void )
+int _ip445Initialise( const char * functionName )
 {
   return(OK);
 }
 
+int xy2445Initialise( void )
+{
+  return _ip445Initialise( "xy2445Initialise" );
+}
 
-int xy2445Create( char *pName, unsigned short card, unsigned short slot )
+int ip445Initialise( void )
+{
+  return _ip445Initialise( "ip445Initialise" );
+}
+
+int _ip445Create(
+	const char	*	functionName, 
+	char 		*	pName, 
+	unsigned short card, 
+	unsigned short slot )
 {
   struct config2445 *plist;
   struct config2445 *pconfig;
@@ -139,7 +158,7 @@ int xy2445Create( char *pName, unsigned short card, unsigned short slot )
   status = ipmValidate(card, slot, IP_MANUFACTURER_XYCOM, IP_MODEL_XYCOM_2445);
   if( status )
   {
-    printf("xy2445Create: Error %d from ipmValidate\n", status);
+    printf("%s: Error %d from ipmValidate\n", functionName, status);
     return S_xy2445_validateFailed;
   }
 
@@ -148,7 +167,7 @@ int xy2445Create( char *pName, unsigned short card, unsigned short slot )
     ptrXy2445First = malloc(sizeof(struct config2445));
     if( !ptrXy2445First )
     {
-      printf("xy2445Create: First malloc failed\n");
+      printf("%s: First malloc failed\n", functionName);
       return S_xy2445_mallocFailed;
     }
     else
@@ -163,7 +182,7 @@ int xy2445Create( char *pName, unsigned short card, unsigned short slot )
     {
       if( !strcmp(plist->pName, pName) || ((plist->card == card) && (plist->slot == slot)) )
       {
-        printf("xy2445Create: Duplicate device (%s, %d, %d)\n", pName, card, slot);
+        printf("%s: Duplicate device (%s, %d, %d)\n", functionName, pName, card, slot);
         return S_xy2445_duplicateDevice;
       }
       if( plist->pnext == NULL )
@@ -177,7 +196,7 @@ int xy2445Create( char *pName, unsigned short card, unsigned short slot )
     pconfig = malloc(sizeof(struct config2445));
     if( pconfig == NULL )
     {
-      printf("xy2445Create: malloc failed\n");
+      printf("%s: malloc failed\n", functionName);
       return S_xy2445_mallocFailed;
     }
 
@@ -190,6 +209,35 @@ int xy2445Create( char *pName, unsigned short card, unsigned short slot )
   return(OK);
 }
 
+int xy2440Create(
+        char            *       pName,
+        unsigned short  card,
+        unsigned short  slot,
+        char            *       modeName,
+        char            *       intHandlerName,
+        char            *       usrFunc,
+        short                   vector,
+        short                   event,
+        short                   debounce )
+{
+        return _ip440Create( "xy2440Create", pName, card, slot, modeName,
+                                                intHandlerName, usrFunc, vector, event, debounce );
+}
+
+int ip440Create(
+        char            *       pName,
+        unsigned short  card,
+        unsigned short  slot,
+        char            *       modeName,
+        char            *       intHandlerName,
+        char            *       usrFunc,
+        short                   vector,
+        short                   event,
+        short                   debounce )
+{
+        return _ip440Create( "ip440Create", pName, card, slot, modeName,
+                                                intHandlerName, usrFunc, vector, event, debounce );
+}
 
 void xy2445SetConfig( char *pName, unsigned short card, unsigned short slot,
                       struct config2445 *pconfig )
@@ -480,10 +528,44 @@ static void xy2445CreateCallFunc(const iocshArgBuf *arg)
     xy2445Create(arg[0].sval, arg[1].ival, arg[2].ival);
 }
 
+/* ip445Report(int interest) */
+static const iocshArg ip445ReportArg0 = {"interest", iocshArgInt};
+static const iocshArg * const ip445ReportArgs[1] = {&ip445ReportArg0};
+static const iocshFuncDef ip445ReportFuncDef =
+    {"ip445Report",1,ip445ReportArgs};
+static void ip445ReportCallFunc(const iocshArgBuf *args)
+{
+    xy2445Report(args[0].ival);
+}
+
+/* ip445Create( char *pName, unsigned short card, unsigned short slot ) */
+static const iocshArg ip445CreateArg0 = {"pName",iocshArgPersistentString};
+static const iocshArg ip445CreateArg1 = {"card", iocshArgInt};
+static const iocshArg ip445CreateArg2 = {"slot", iocshArgInt};
+static const iocshArg * const ip445CreateArgs[3] = {
+    &ip445CreateArg0, &ip445CreateArg1, &ip445CreateArg2 };
+static const iocshFuncDef ip445CreateFuncDef =
+    {"ip445Create",3,ip445CreateArgs};
+static void ip445CreateCallFunc(const iocshArgBuf *arg)
+{
+    ip445Create(arg[0].sval, arg[1].ival, arg[2].ival);
+}
+
+
 LOCAL void drvXy2445Registrar(void) {
     iocshRegister(&xy2445ReportFuncDef,xy2445ReportCallFunc);
     iocshRegister(&xy2445CreateFuncDef,xy2445CreateCallFunc);
+    iocshRegister(&ip445ReportFuncDef,ip445ReportCallFunc);
+    iocshRegister(&ip445CreateFuncDef,ip445CreateCallFunc);
 }
 epicsExportRegistrar(drvXy2445Registrar);
+
+LOCAL void drvip445Registrar(void) {
+    iocshRegister(&xy2445ReportFuncDef,xy2445ReportCallFunc);
+    iocshRegister(&xy2445CreateFuncDef,xy2445CreateCallFunc);
+    iocshRegister(&ip445ReportFuncDef,ip445ReportCallFunc);
+    iocshRegister(&ip445CreateFuncDef,ip445CreateCallFunc);
+}
+epicsExportRegistrar(drvip445Registrar);
 
 #endif

@@ -209,34 +209,21 @@ int _ip445Create(
   return(OK);
 }
 
-int xy2440Create(
+int xy2445Create(
         char            *       pName,
-        unsigned short  card,
-        unsigned short  slot,
-        char            *       modeName,
-        char            *       intHandlerName,
-        char            *       usrFunc,
-        short                   vector,
-        short                   event,
-        short                   debounce )
+        unsigned short card,
+        unsigned short slot )
+
 {
-        return _ip440Create( "xy2440Create", pName, card, slot, modeName,
-                                                intHandlerName, usrFunc, vector, event, debounce );
+	return _ip445Create("xy2445Create", pname, card, slot);
 }
 
-int ip440Create(
+int ip445Create(
         char            *       pName,
-        unsigned short  card,
-        unsigned short  slot,
-        char            *       modeName,
-        char            *       intHandlerName,
-        char            *       usrFunc,
-        short                   vector,
-        short                   event,
-        short                   debounce )
+        unsigned short card,
+        unsigned short slot )
 {
-        return _ip440Create( "ip440Create", pName, card, slot, modeName,
-                                                intHandlerName, usrFunc, vector, event, debounce );
+	return _ip445Create("ip445Create", pname, card, slot);
 }
 
 void xy2445SetConfig( char *pName, unsigned short card, unsigned short slot,

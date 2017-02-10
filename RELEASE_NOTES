@@ -31,9 +31,18 @@
 #
 #==============================================================
 #
-R2.3.0:           marcio, 2/7/2017
-                  Creating new release R2.3.0 to avoid confusion w/ prior pcds R2.2.* releases
-                  Also updated to new git workflow base build support
+R2.5.0:          Marcio Donadio, 02/10/2017
+                 Functions xy2445Create and ip2445Create were not included when
+                 changing code to support both names: xy2445 and ip445.
+
+R2.4.0:          Marcio Donadio, 02/09/2017
+                 - Some files modified to build for git workflow.
+                 - Updated lib, dbd, and other files to support ip445 vs xy2445.
+                   The old xy2445 variants are still supported for backward compatibility.
+
+R2.3.0:          Marcio Donadio, 02/07/2017
+                 Creating new release R2.3.0 to avoid confusion w/ prior pcds R2.2.* releases
+                 Also updated to new git workflow base build support
 
 xy2445-R1-0_1-1: Build against ipac-R2-11_1-2 which builds for all targets
                  Build for target linuxRT-x86_64

@@ -1,0 +1,8 @@
+# ip445 signal autosave file
+$(SIG).VAL
+$(SIG).DESC
+$(SIG).HIGH
+$(SIG).ONAM
+$(SIG).OSV
+$(SIG).ZNAM
+$(SIG).ZSV

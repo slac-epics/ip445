@@ -215,7 +215,7 @@ int xy2445Create(
         unsigned short slot )
 
 {
-	return _ip445Create("xy2445Create", pname, card, slot);
+	return _ip445Create("xy2445Create", pName, card, slot);
 }
 
 int ip445Create(
@@ -223,7 +223,7 @@ int ip445Create(
         unsigned short card,
         unsigned short slot )
 {
-	return _ip445Create("ip445Create", pname, card, slot);
+	return _ip445Create("ip445Create", pName, card, slot);
 }
 
 void xy2445SetConfig( char *pName, unsigned short card, unsigned short slot,

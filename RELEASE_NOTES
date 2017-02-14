@@ -31,6 +31,10 @@
 #
 #==============================================================
 #
+R2.6.0-1.0.1     Bruce Hill, 02/13/2017
+				 Changed to ipac/R2.8-1.2.1 as that's the ipac release that
+				 supports the linux pciE cards
+
 R2.6.0-1.0.0     Marcio Donadio, 02/13/2017
                  Applied patches direct-16bits-read-write.patch, ip445-signal-template-arch-req.patch, add_LIBRARY_IOC_Linux_to_Makefile.patch to release R2.6.0. These patches does the following:
                  - PCDS way of reading and writing 16 bits directly.

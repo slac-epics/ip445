@@ -78,7 +78,6 @@ int xy2445Report( int interest )
   int               i;
   int               j;
   unsigned short    val;
-  unsigned char     *idptr;
   struct config2445 *plist;
 
   plist = ptrXy2445First;
@@ -86,23 +85,19 @@ int xy2445Report( int interest )
   {
     if( interest == 0 || interest == 2 )
     {
-      idptr = (unsigned char *)plist->brd_ptr + 0x80;
-      for(i = 0, j = 1; i < 32; i++, j += 2)
-        plist->id_prom[i] = xy2445Input((unsigned int *)&idptr[j]);
-
       printf("\nBoard Status Information: %s\n", plist->pName);
       printf("\nBase IO Address:          0x%lx\n", (unsigned long)plist->brd_ptr);
       printf("\nIdentification:              ");
       for(i = 0; i < 4; i++)                 /* identification */
-        printf("%c",plist->id_prom[i]);
-      printf("\nManufacturer's ID:           %x",(unsigned char)plist->id_prom[4]);
-      printf("\nIP Model Number:             %x",(unsigned char)plist->id_prom[5]);
-      printf("\nRevision:                    %x",(unsigned char)plist->id_prom[6]);
-      printf("\nReserved:                    %x",(unsigned char)plist->id_prom[7]);
-      printf("\nDriver I.D. (low):           %x",(unsigned char)plist->id_prom[8]);
-      printf("\nDriver I.D. (high):          %x",(unsigned char)plist->id_prom[9]);
-      printf("\nTotal I.D. Bytes:            %x",(unsigned char)plist->id_prom[10]);
-      printf("\nCRC:                         %x",(unsigned char)plist->id_prom[11]);
+        printf("%c",plist->id_ptr[i]);
+      printf("\nManufacturer's ID:           %x",(unsigned char)plist->id_ptr[4]);
+      printf("\nIP Model Number:             %x",(unsigned char)plist->id_ptr[5]);
+      printf("\nRevision:                    %x",(unsigned char)plist->id_ptr[6]);
+      printf("\nReserved:                    %x",(unsigned char)plist->id_ptr[7]);
+      printf("\nDriver I.D. (low):           %x",(unsigned char)plist->id_ptr[8]);
+      printf("\nDriver I.D. (high):          %x",(unsigned char)plist->id_ptr[9]);
+      printf("\nTotal I.D. Bytes:            %x",(unsigned char)plist->id_ptr[10]);
+      printf("\nCRC:                         %x",(unsigned char)plist->id_ptr[11]);
       printf("\n\n");
     }
 
@@ -234,9 +229,10 @@ void xy2445SetConfig( char *pName, unsigned short card, unsigned short slot,
   pconfig->card    = card;
   pconfig->slot    = slot;
   pconfig->brd_ptr = (volatile struct map2445 *)ipmBaseAddr(card, slot, ipac_addrIO);
+  pconfig->id_ptr = (unsigned short *) ipmBaseAddr(card, slot, ipac_addrID);
   
   /* Perform a software reset */
-  xy2445Output((unsigned *)&pconfig->brd_ptr->cntl_reg, (int)0x01);
+  pconfig->brd_ptr->cntl_reg = 0x01;
 }
 
 
@@ -270,7 +266,7 @@ long xy2445Read( char *name, short port, short bit, int readFlag,
       map_ptr = plist->brd_ptr;
       if( readFlag == BIT || readFlag == PORT )
       {
-        *pval = xy2445Input((unsigned *)&map_ptr->io_map[port].io_port);
+        *pval = (unsigned short) map_ptr->io_map[port].io_port;
         if( readFlag == BIT )
         {
           if( *pval & (1 << bit) )
@@ -281,10 +277,10 @@ long xy2445Read( char *name, short port, short bit, int readFlag,
       }
       else
       {
-        port0 = xy2445Input((unsigned *)&map_ptr->io_map[0].io_port);
-        port1 = xy2445Input((unsigned *)&map_ptr->io_map[1].io_port);
-        port2 = xy2445Input((unsigned *)&map_ptr->io_map[2].io_port);
-        port3 = xy2445Input((unsigned *)&map_ptr->io_map[3].io_port);
+        port0 = map_ptr->io_map[0].io_port;
+        port1 = map_ptr->io_map[1].io_port;
+        port2 = map_ptr->io_map[2].io_port;
+        port3 = map_ptr->io_map[3].io_port;
 
         /* Combine into a 32-bit integer */
         res   = (port3<<24) + (port2<<16) + (port1<<8) + port0;
@@ -362,8 +358,8 @@ long xy2445Write( char *name, short port, short bit, int writeFlag,
         {
           bpos  = 1 << bit;
           value = value << bit;
-          xy2445Output( (unsigned *)&map_ptr->io_map[port].io_port, 
-                        (int)((map_ptr->io_map[port].io_port & ~bpos) | value));
+          map_ptr->io_map[port].io_port = 
+                        (int)((map_ptr->io_map[port].io_port & ~bpos) | value);
         }
       }
       else if( writeFlag == PORT )
@@ -374,7 +370,7 @@ long xy2445Write( char *name, short port, short bit, int writeFlag,
           return S_xy2445_writeError;
         }
         else
-          xy2445Output( (unsigned *)&map_ptr->io_map[port].io_port, (int)value );
+          map_ptr->io_map[port].io_port = value;
       }
       else if( writeFlag == NIBBLE || writeFlag == WORD )
       {
@@ -391,11 +387,11 @@ long xy2445Write( char *name, short port, short bit, int writeFlag,
         else
         {
           /* Read all ports */
-          port0 = xy2445Input((unsigned *)&map_ptr->io_map[0].io_port);
-          port1 = xy2445Input((unsigned *)&map_ptr->io_map[1].io_port);
-          port2 = xy2445Input((unsigned *)&map_ptr->io_map[2].io_port);
-          port3 = xy2445Input((unsigned *)&map_ptr->io_map[3].io_port);
-
+          port0 = map_ptr->io_map[0].io_port;
+          port1 = map_ptr->io_map[1].io_port;
+          port2 = map_ptr->io_map[2].io_port;
+          port3 = map_ptr->io_map[3].io_port;
+ 
           /* Combine into a 32-bit unsigned integer */
           res = (port3<<24) + (port2<<16) + (port1<<8) + port0;
 
@@ -426,13 +422,13 @@ long xy2445Write( char *name, short port, short bit, int writeFlag,
 
           /* Write new port values */
           newport = res & 0xFF;
-          xy2445Output((unsigned *)&map_ptr->io_map[0].io_port, newport);
+          map_ptr->io_map[0].io_port = newport;
           newport = (res>>8) & 0xFF;
-          xy2445Output((unsigned *)&map_ptr->io_map[1].io_port, newport);
+          map_ptr->io_map[1].io_port = newport;
           newport = (res>>16) & 0xFF;
-          xy2445Output((unsigned *)&map_ptr->io_map[2].io_port, newport);
+          map_ptr->io_map[2].io_port = newport;
           newport = (res>>24) & 0xFF;
-          xy2445Output((unsigned *)&map_ptr->io_map[3].io_port, newport);
+          map_ptr->io_map[3].io_port = newport;
         }
       }
       else
@@ -472,19 +468,6 @@ void *xy2445FindCard( char *name )
   else
     return plist;
 }
-
-
-unsigned char xy2445Input( unsigned *addr ) 
-{
-  return((unsigned char) *((volatile char *)addr));
-}
-
-
-void xy2445Output( unsigned *addr, int b )
-{
-  *((volatile char *)addr) = (char)b; 
-}
-
 
 /*******************************************************************************
 * EPICS iocsh Command registry

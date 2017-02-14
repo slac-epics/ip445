@@ -67,12 +67,10 @@ Copyright (c) 2002 Andy Foster
 
 struct map2445
 {
-  unsigned char unused1;
-  unsigned char cntl_reg;   /* control register */
+  unsigned short cntl_reg;   /* control register */
   struct io
   {
-    unsigned char unused2;
-    unsigned char io_port;  /* IO registers */
+    unsigned short io_port;  /* IO registers */
   } io_map[4];
 };
 
@@ -86,7 +84,7 @@ struct config2445
   unsigned short    card;         /* Number of IP carrier board           */
   unsigned short    slot;         /* Slot number in carrier board         */
   volatile struct map2445    *brd_ptr;     /* pointer to base address of board     */
-  unsigned char     id_prom[32];  /* board ID Prom                        */
+  unsigned short    *id_ptr;      /* board ID Prom                        */
 };
 
 int           xy2445Report( int interest );
@@ -105,7 +103,5 @@ long          xy2445Read( char *name, short port, short bit, int readFlag,
 long          xy2445Write( char *name, short port, short bit, int writeFlag,
                            long value, int debug );
 void          *xy2445FindCard( char *name );
-unsigned char xy2445Input( unsigned *addr );
-void          xy2445Output( unsigned *addr, int b );
 
 #endif  /* INCdrvXy2445H */

@@ -1,0 +1,12 @@
+diff --git a/xy2445App/src/Makefile b/xy2445App/src/Makefile
+index 0c0c533..25dc1b7 100644
+--- a/xy2445App/src/Makefile
++++ b/xy2445App/src/Makefile
+@@ -13,6 +13,7 @@ LIBSRCS += devXy2445.c
+ LIBSRCS += xipIo.c
+ 
+ # Link everything into a library:
++LIBRARY_IOC_Linux   = Xy2445 ip445
+ LIBRARY_IOC_vxWorks = Xy2445 ip445
+ LIBRARY_IOC_RTEMS   = Xy2445 ip445
+ Xy2445_LIBS += Ipac

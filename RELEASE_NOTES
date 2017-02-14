@@ -31,6 +31,10 @@
 #
 #==============================================================
 #
+R2.6.0:          Marcio Donadio, 02/13/2017
+                 - Included ip445_552c.pdf manual.
+                 - Changed DTYP from ACROMAG-IP445 to IP445 in order to keep the same standard used in IP330, IP340, IP440. 
+
 R2.5.0:          Marcio Donadio, 02/10/2017
                  Functions xy2445Create and ip2445Create were not included when
                  changing code to support both names: xy2445 and ip445.

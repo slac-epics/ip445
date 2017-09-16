@@ -27,6 +27,9 @@
 #
 #==============================================================
 #
+R2.2.3-1.4.2:    Changing to support some of the git workflow
+                 Remove autosave and archive files
+
 xy2445-R2-0-0:   Build with base-R3-14-8-2=lcls-3
                  Build with rtems-4-9-1
                  Comments out readback during init to help restore

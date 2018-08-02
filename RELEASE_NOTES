@@ -31,6 +31,14 @@
 #
 #==============================================================
 #
+R2.8.1   	 Marcio Donadio, 08/01/2018
+                 - This is a release that uses IPAC R2.14-0.1.0. This version
+                   of IPAC doesn't provide drivers for PCIe Acromag carrier
+                   board. If you need this feature, use ip445/R2.8.0, instead.
+
+R2.8.0           Marcio Donadio, 08/01/2018
+		 - Merged master with R2.6.0-1.branch.
+
 R2.6.0-1.1.0     Marcio Donadio, 08/01/2018
                  - Improved .gitignore
 		 - ipac/R2.8-1.2.1 was only released to RTEMS. For LinuxRT and rhe6, we need

@@ -73,6 +73,11 @@ epicsExportAddress(drvet, drvip445);
 
 LOCAL struct config2445 *ptrXy2445First = NULL;
 
+int ip445Report( int interest ) 
+{ 
+  return xy2445Report(interest);
+}
+
 int xy2445Report( int interest )
 {
   int               i;

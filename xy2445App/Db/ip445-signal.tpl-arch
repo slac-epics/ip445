@@ -1,0 +1,8 @@
+# ip445 signal archive file
+$(SIG).VAL		1	monitor
+$(SIG).DESC		10
+$(SIG).HIGH		10
+$(SIG).ONAM		10
+$(SIG).OSV		10
+$(SIG).ZNAM		10
+$(SIG).ZSV		10

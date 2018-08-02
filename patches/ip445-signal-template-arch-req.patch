@@ -1,0 +1,43 @@
+diff --git a/xy2445App/Db/Makefile b/xy2445App/Db/Makefile
+index f1e0091..8c7d8c0 100644
+--- a/xy2445App/Db/Makefile
++++ b/xy2445App/Db/Makefile
+@@ -17,6 +17,10 @@ DB += ip445.template
+ DB += xy2445.db
+ DB += ip445.db
+ 
++ARCHIVE += ip445-signal.tpl-arch
++
++REQ += ip445-signal.tpl-req
++
+ #----------------------------------------------------
+ # If <anyname>.db template is not named <anyname>*.template add
+ # <anyname>_TEMPLATE = <templatename>
+diff --git a/xy2445App/Db/ip445-signal.tpl-arch b/xy2445App/Db/ip445-signal.tpl-arch
+new file mode 100644
+index 0000000..e9a37db
+--- /dev/null
++++ b/xy2445App/Db/ip445-signal.tpl-arch
+@@ -0,0 +1,8 @@
++# ip445 signal archive file
++$(SIG).VAL		1	monitor
++$(SIG).DESC		10
++$(SIG).HIGH		10
++$(SIG).ONAM		10
++$(SIG).OSV		10
++$(SIG).ZNAM		10
++$(SIG).ZSV		10
+diff --git a/xy2445App/Db/ip445-signal.tpl-req b/xy2445App/Db/ip445-signal.tpl-req
+new file mode 100644
+index 0000000..e13393e
+--- /dev/null
++++ b/xy2445App/Db/ip445-signal.tpl-req
+@@ -0,0 +1,8 @@
++# ip445 signal autosave file
++$(SIG).VAL
++$(SIG).DESC
++$(SIG).HIGH
++$(SIG).ONAM
++$(SIG).OSV
++$(SIG).ZNAM
++$(SIG).ZSV

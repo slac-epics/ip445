@@ -31,6 +31,22 @@
 #
 #==============================================================
 #
+R2.6.0-1.1.0     Marcio Donadio, 08/01/2018
+                 - Improved .gitignore
+		 - ipac/R2.8-1.2.1 was only released to RTEMS. For LinuxRT and rhe6, we need
+		   to use ipac/R2.8-1.2.2
+		 - ip445Report() function was missing
+
+R2.6.0-1.0.1     Bruce Hill, 02/13/2017
+				 Changed to ipac/R2.8-1.2.1 as that's the ipac release that
+				 supports the linux pciE cards
+
+R2.6.0-1.0.0     Marcio Donadio, 02/13/2017
+                 Applied patches direct-16bits-read-write.patch, ip445-signal-template-arch-req.patch, add_LIBRARY_IOC_Linux_to_Makefile.patch to release R2.6.0. These patches does the following:
+                 - PCDS way of reading and writing 16 bits directly.
+                 - add archive and autosave template request files for ip445 signals.
+                 - add LIBRARY_IOC_Linux   = Xy2445 ip445 in src Makefile.
+
 R2.6.0:          Marcio Donadio, 02/13/2017
                  - Included ip445_552c.pdf manual.
                  - Changed DTYP from ACROMAG-IP445 to IP445 in order to keep the same standard used in IP330, IP340, IP440. 

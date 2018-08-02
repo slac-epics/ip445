@@ -15,3 +15,5 @@ templates/
 cdCommands
 envPaths
 tags
+archive/
+autosave/

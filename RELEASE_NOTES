@@ -31,6 +31,9 @@
 #
 #==============================================================
 #
+R2.8.2           Kristi Luchini  10/18/2019
+                 - Using IPAC R2.14-0.2.0
+
 R2.6.0-1.1.0     Marcio Donadio, 08/01/2018
                  - Improved .gitignore
 		 - ipac/R2.8-1.2.1 was only released to RTEMS. For LinuxRT and rhe6, we need

@@ -31,7 +31,7 @@
 #
 #==============================================================
 #
-R2.8.2   	 Marcio Donadio, 10/23/2019
+R2.8.3   	 Marcio Donadio, 10/23/2019
                  - This is a release that uses IPAC R2.14-0.2.0. This version
                    of IPAC doesn't provide drivers for PCIe Acromag carrier
                    board. If you need this feature, use ip445/R2.8.0, instead.

@@ -56,29 +56,39 @@ Copyright (c) 2002 Andy Foster
 
 /* EPICS Driver Support Entry Table */
 
+#ifndef USE_TYPED_DRVET
 struct drvet drvXy2445 = {
   2,
   (DRVSUPFUN) xy2445Report,
   (DRVSUPFUN) xy2445Initialise
 };
+#else
+const drvet drvXy2445 = {2, xy2445Report, xy2445Initialise};
+#endif
+
 epicsExportAddress(drvet, drvXy2445);
 
+#ifndef USE_TYPED_DRVET
 struct drvet drvip445 = {
   2,
   (DRVSUPFUN) ip445Report,
   (DRVSUPFUN) ip445Initialise
 };
+#else
+const drvet drvip445 = {2, ip445Report, ip445Initialise};
+#endif
+
 epicsExportAddress(drvet, drvip445);
 #endif
 
 LOCAL struct config2445 *ptrXy2445First = NULL;
 
-int ip445Report( int interest ) 
+long ip445Report( int interest ) 
 { 
   return xy2445Report(interest);
 }
 
-int xy2445Report( int interest )
+long xy2445Report( int interest )
 {
   int               i;
   int               j;
@@ -130,17 +140,17 @@ int xy2445Report( int interest )
   return(OK);
 }
 
-int _ip445Initialise( const char * functionName )
+long _ip445Initialise( const char * functionName )
 {
   return(OK);
 }
 
-int xy2445Initialise( void )
+long xy2445Initialise( void )
 {
   return _ip445Initialise( "xy2445Initialise" );
 }
 
-int ip445Initialise( void )
+long ip445Initialise( void )
 {
   return _ip445Initialise( "ip445Initialise" );
 }

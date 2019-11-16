@@ -87,10 +87,10 @@ struct config2445
   unsigned short    *id_ptr;      /* board ID Prom                        */
 };
 
-int           xy2445Report( int interest );
-int           xy2445Initialise( void );
-int           ip445Report( int interest );
-int           ip445Initialise( void );
+long          xy2445Report( int interest );
+long          xy2445Initialise( void );
+long          ip445Report( int interest );
+long          ip445Initialise( void );
 int           xy2445Create( char *pName, unsigned short card,
                             unsigned short slot );
 int           ip445Create( char *pName, unsigned short card,

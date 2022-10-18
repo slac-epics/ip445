@@ -10,7 +10,7 @@ DBD += Xy2445.dbd
 # Source files (for depends target):
 LIBSRCS += drvXy2445.c
 LIBSRCS += devXy2445.c
-LIBSRCS += xipIo.c
+#LIBSRCS += xipIo.c
 
 # Link everything into a library:
 LIBRARY_IOC_Linux   = Xy2445 ip445

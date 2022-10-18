@@ -34,6 +34,8 @@ Copyright (c) 2002 Andy Foster
 
 *******************************************************************************/
 
+#define USE_TYPED_RSET
+
 #include        <stdlib.h>
 #include        <stdio.h>
 #include        <string.h>

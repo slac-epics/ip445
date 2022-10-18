@@ -31,6 +31,10 @@
 #
 #==============================================================
 #
+R2.8.5           Vincent Esposito 10/17/2022
+                 - Using IPAC R2.15-1.0.2
+                 - Compile for rhel7
+
 R2.8.2           Kristi Luchini  10/18/2019
                  - Using IPAC R2.14-0.2.0
 
